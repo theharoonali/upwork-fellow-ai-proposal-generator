@@ -14,7 +14,7 @@ const Form = () => {
         "https://express-app-typescript.vercel.app/test"
       );
       if (!response.ok) {
-        throw new Error("Failed to fetch data");
+        throw new Error("Failed!");
       }
       const data = await response.json();
       setResponse(data.message);
