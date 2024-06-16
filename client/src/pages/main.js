@@ -3,6 +3,7 @@ import Header from "../components/header";
 import Button from "../components/button";
 import TemplateCard from "../components/templateCard";
 import Span from "../components/span";
+import Template from "./template";
 
 function Main() {
   const [step, setStep] = React.useState(0);
@@ -55,14 +56,11 @@ function Main() {
               </div>
             </div>
           )}
-          {step === 1 && (
-            <div className="main-section">
-              <div className="sub-main-section">Create template fields</div>
-              <div>
-                <Button text="Save Template" onClick={onSaveTemplate} />
-              </div>
-            </div>
-          )}
+
+          {/* Create template */}
+          {step === 1 && <Template onClick={onSaveTemplate} />}
+
+          {/* Generate Proposal */}
           {step === 2 && (
             <div className="main-section">
               <div className="sub-main-section">Generate Proposal</div>
@@ -71,6 +69,8 @@ function Main() {
               </div>
             </div>
           )}
+
+          {/* Settings */}
           {step === 3 && (
             <div className="main-section">
               <div className="sub-main-section">Settings</div>
