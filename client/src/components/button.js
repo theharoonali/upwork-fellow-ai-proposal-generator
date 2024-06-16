@@ -1,26 +1,22 @@
-function Button({text, onClick = () => {}, navigate = null}) {
-  
-  const handleClick = () => {
-    onClick(navigate ? navigate : "console")
-  }
-  
-    return (
-    <>
-      <button
-              style={{
-                height: "40px",
-                borderRadius: "5px",
-                backgroundColor: "#36aa55",
-                color: "white",
-                border:"none",
-                cursor: "pointer"
-              }}
+import React from 'react';
 
-              onClick = {handleClick}
-            >
-              {text}
-            </button>
-    </>
+function Button({ text, onClick = () => {}, navigate = null, disable = false }) {
+  const handleClick = (e) => {
+    if (disable) {
+      e.preventDefault();
+      return;
+    }
+    onClick();
+  };
+
+  return (
+    <button
+      className={`primary-button ${disable ? 'disabled' : ''}`}
+      onClick={handleClick}
+      disabled={disable}
+    >
+      {text}
+    </button>
   );
 }
 

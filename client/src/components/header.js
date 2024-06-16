@@ -1,26 +1,37 @@
-function Header() {
+import back from "../assets/back.svg";
+import settings from "../assets/settings.svg";
+
+function Header({ onClick, backDisable, onClickSettings }) {
   return (
     <div
       style={{
-        margin: "0px",
-        height: "80px",
-        width: "550px",
+        height: "60px",
+        width: "100%",
         backgroundColor: "#36aa55",
         textAlign: "center",
         display: "flex",
-        justifyContent: "center",
+        justifyContent: "space-between",
       }}
     >
-      <p
+      <div className="header-icon" onClick={onClick}>
+        {!backDisable && <img src={back} alt="back" />}
+      </div>
+
+      <div
         style={{
           color: "#ffffff",
-          fontSize: "25px",
+          fontSize: "16px",
           width: "auto",
-          marginTop: "25px",
+          alignItems: "center",
+          justifyContent: "center",
+          display: "flex",
         }}
       >
         Templates
-      </p>
+      </div>
+      <div className="header-icon" onClick={onClickSettings}>
+        <img src={settings} alt="settings" />
+      </div>
     </div>
   );
 }
