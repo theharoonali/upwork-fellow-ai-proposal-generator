@@ -16,13 +16,13 @@ function Main() {
   useEffect(() => {
     const storedTemplates = localStorage.getItem("templates");
     const apiKey = localStorage.getItem("apiKeyUpworkFellow");
+
     if (storedTemplates) {
       setTemplates(JSON.parse(storedTemplates));
     }
     setEditTemplate([]);
-    if (apiKey) {
-      setCheckAPI(true);
-    }
+
+    setCheckAPI(!!apiKey);
   }, [step]);
 
   const onCreateTemplate = () => {

@@ -12,7 +12,6 @@ function Generate({ onClick }) {
   };
 
   const handleSubmit = () => {
-    console.log(formData);
     onClick();
   };
 
