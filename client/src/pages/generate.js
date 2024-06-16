@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import Button from "../components/button";
-import Span from "../components/span";
 
-function Settings({ onClick }) {
+function Generate({ onClick }) {
   const [formData, setFormData] = useState({
-    api: "",
+    proposal: "",
   });
 
   const handleChange = (e) => {
@@ -17,32 +16,24 @@ function Settings({ onClick }) {
     onClick();
   };
 
-  const isSubmitDisabled = formData.api === "";
+  const isSubmitDisabled = formData.proposal === "";
 
   return (
     <>
       <div className="main-section">
         <div className="sub-main-section">
-          <input
+          <textarea
             type="text"
-            name="api"
-            placeholder="API KEY*"
-            value={formData.api}
+            name="proposal"
+            placeholder="Proposal"
+            value={formData.proposal}
             onChange={(e) => handleChange(e)}
+            className="textarea-height-2"
           />
-          <span
-            style={{
-              textDecoration: "underline",
-              textUnderlineOffset: "3px",
-              cursor:'pointer'
-            }}
-          >
-            <Span text={"Click here to see OpenAI API Docs."} />
-          </span>
         </div>
         <div>
           <Button
-            text="Save"
+            text="Generate"
             onClick={handleSubmit}
             disable={isSubmitDisabled}
           />
@@ -52,4 +43,4 @@ function Settings({ onClick }) {
   );
 }
 
-export default Settings;
+export default Generate;

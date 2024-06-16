@@ -5,6 +5,7 @@ import TemplateCard from "../components/templateCard";
 import Span from "../components/span";
 import Template from "./template";
 import Settings from "./settings";
+import Generate from "./generate";
 
 function Main() {
   const [step, setStep] = React.useState(0);
@@ -29,6 +30,21 @@ function Main() {
     setStep(2);
   };
 
+  const getTitle = () => {
+    switch (step) {
+      case 0:
+        return "Templates";
+      case 1:
+        return "Create Template";
+      case 2:
+        return "Generate Proposal";
+      case 3:
+        return "Settings";
+      default:
+        return "Templates";
+    }
+  };
+
   return (
     <>
       <div>
@@ -36,6 +52,7 @@ function Main() {
           onClick={onClickBack}
           backDisable={step === 0}
           onClickSettings={onClickSettings}
+          title={getTitle()}
         />
         <div
           style={{
@@ -62,14 +79,7 @@ function Main() {
           {step === 1 && <Template onClick={onSaveTemplate} />}
 
           {/* Generate Proposal */}
-          {step === 2 && (
-            <div className="main-section">
-              <div className="sub-main-section">Generate Proposal</div>
-              <div>
-                <Button text="Regenerate" />
-              </div>
-            </div>
-          )}
+          {step === 2 && <Generate onClick={onClickBack} />}
 
           {/* Settings */}
           {step === 3 && <Settings onClick={onClickBack} />}

@@ -63,6 +63,7 @@ const Form = () => {
           placeholder="Message"
           value={formData.message}
           onChange={handleChange}
+          className="textarea-height"
         />
         <button type="submit">Submit</button>
       </form>

@@ -2,6 +2,14 @@ import React from "react";
 import deleteIcon from "../assets/delete.svg";
 
 const TemplateCard = ({ onClick }) => {
+  const handleEdit = () => {
+    console.log("Edit clicked");
+  };
+
+  const handleDelete = () => {
+    console.log("Delete clicked");
+  };
+
   return (
     <div>
       <div className="card" onClick={onClick}>
@@ -38,6 +46,10 @@ const TemplateCard = ({ onClick }) => {
                 justifyContent: "center",
                 alignItems: "center",
               }}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleEdit();
+              }}
             >
               Edit
             </div>
@@ -46,9 +58,14 @@ const TemplateCard = ({ onClick }) => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                cursor: "pointer",
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleDelete();
               }}
             >
-              <img src={deleteIcon} alt="back" />
+              <img src={deleteIcon} alt="delete" />
             </div>
           </div>
         </div>

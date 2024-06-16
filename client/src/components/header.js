@@ -1,7 +1,7 @@
 import back from "../assets/back.svg";
 import settings from "../assets/settings.svg";
 
-function Header({ onClick, backDisable, onClickSettings }) {
+function Header({ onClick, backDisable, onClickSettings, title }) {
   return (
     <div
       style={{
@@ -10,26 +10,48 @@ function Header({ onClick, backDisable, onClickSettings }) {
         backgroundColor: "#36aa55",
         textAlign: "center",
         display: "flex",
-        justifyContent: "space-between",
+        alignItems: "center",
+        justifyContent: "center",
+        position: "relative",
       }}
     >
-      <div className="header-icon" onClick={onClick}>
-        {!backDisable && <img src={back} alt="back" />}
-      </div>
+      {!backDisable && (
+        <div
+          className="header-icon"
+          onClick={onClick}
+          style={{
+            position: "absolute",
+            left: "10px",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <img src={back} alt="back" />
+        </div>
+      )}
 
       <div
         style={{
           color: "#ffffff",
           fontSize: "16px",
-          width: "auto",
           alignItems: "center",
           justifyContent: "center",
           display: "flex",
         }}
       >
-        Templates
+        {title}
       </div>
-      <div className="header-icon" onClick={onClickSettings}>
+
+      <div
+        className="header-icon"
+        onClick={onClickSettings}
+        style={{
+          position: "absolute",
+          right: "10px",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
         <img src={settings} alt="settings" />
       </div>
     </div>

@@ -76,6 +76,7 @@ function Template({ onClick }) {
             placeholder="Custom Instruction for AI"
             value={formData.instructions}
             onChange={(e) => handleChange(e)}
+            className="textarea-height"
           />
 
           {formData.jobDetails.map((job, index) => (
@@ -140,6 +141,7 @@ function Template({ onClick }) {
                   placeholder="Job Detail / Stack used / Add portfolio Links"
                   value={job.description}
                   onChange={(e) => handleChange(e, index)}
+                  className="textarea-height"
                 />
               </div>
             </div>
