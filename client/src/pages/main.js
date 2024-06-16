@@ -39,18 +39,13 @@ function Main() {
           style={{
             padding: "20px",
             backgroundColor: "#f7f7f7",
-            height: "450px",
+            height: "100%",
+            minHeight: "450px",
           }}
         >
           {step === 0 && (
             <div className="main-section">
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "12px",
-                }}
-              >
+              <div className="sub-main-section">
                 <TemplateCard onClick={onGenerateProposal} />
                 <TemplateCard onClick={onGenerateProposal} />
               </div>
