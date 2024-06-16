@@ -53,16 +53,18 @@
   transition: background-color 0.3s ease;
 }
 
-.card {
+.card, input, textarea {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 40px;
   border-radius: 3px;
   background-color: #eaeaea;
+  border: 1px solid #eaeaea;
   padding: 12px 24px;
   transition: background-color 0.3s ease;
   font-size: 14px;
+  outline: none;
   cursor: pointer;
 }
 
@@ -83,4 +85,14 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  margin-bottom: 24px;
+}
+
+input:focus, textarea:focus{
+  transition: background-color 0.3s ease;
+  border: 1px solid #36aa55;
+}
+
+textarea{
+  min-height: 100px;
 }

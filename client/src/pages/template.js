@@ -1,32 +1,50 @@
-import React from "react";
-import Header from "../components/header";
+import React, { useState } from "react";
 import Button from "../components/button";
-import TemplateCard from "../components/templateCard";
-import Span from "../components/span";
 
 function Template({ onClick }) {
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = useState({
     name: "",
     email: "",
     template: "",
-    title: "",
-    experience: "",
-    description: "",
     instructions: "",
+    jobDetails: [{ title: "", experience: "", description: "" }],
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e, index) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    if (name === "title" || name === "experience" || name === "description") {
+      const updatedJobDetails = [...formData.jobDetails];
+      updatedJobDetails[index] = {
+        ...updatedJobDetails[index],
+        [name]: value,
+      };
+      setFormData({ ...formData, jobDetails: updatedJobDetails });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+  };
+
+  const handleAddMore = () => {
+    setFormData({
+      ...formData,
+      jobDetails: [
+        ...formData.jobDetails,
+        { title: "", experience: "", description: "" },
+      ],
+    });
+  };
+
+  const handleDelete = (index) => {
+    const updatedJobDetails = formData.jobDetails.filter((_, i) => i !== index);
+    setFormData({ ...formData, jobDetails: updatedJobDetails });
   };
 
   const handleSubmit = () => {
     console.log(formData);
-  };
-
-  const onSaveTemplate = () => {
     onClick();
   };
+
+  const isSubmitDisabled = formData.name === "" || formData.template === "";
 
   return (
     <>
@@ -35,53 +53,104 @@ function Template({ onClick }) {
           <input
             type="text"
             name="name"
-            placeholder="Your Name"
+            placeholder="Your Name*"
             value={formData.name}
-            onChange={handleChange}
+            onChange={(e) => handleChange(e)}
           />
           <input
             type="email"
             name="email"
             placeholder="Email"
             value={formData.email}
-            onChange={handleChange}
+            onChange={(e) => handleChange(e)}
           />
           <input
             type="text"
             name="template"
             placeholder="Template Name* (e.g. Software Engineer)"
             value={formData.template}
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            name="title"
-            placeholder="Job Title"
-            value={formData.title}
-            onChange={handleChange}
-          />
-          <input
-            type="number"
-            name="experience"
-            placeholder="Experience in Years"
-            value={formData.experience}
-            onChange={handleChange}
-          />
-          <textarea
-            name="description"
-            placeholder="Job Detail / Stack used / Add portfolio Links"
-            value={formData.description}
-            onChange={handleChange}
+            onChange={(e) => handleChange(e)}
           />
           <textarea
             name="instructions"
             placeholder="Custom Instruction for AI"
             value={formData.instructions}
-            onChange={handleChange}
+            onChange={(e) => handleChange(e)}
           />
+
+          {formData.jobDetails.map((job, index) => (
+            <div key={index}>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <div style={{ fontSize: "14px", padding: "14px 0px" }}>
+                  {index + 1}. Experience
+                </div>
+                {index === 0 ? (
+                  <div
+                    onClick={handleAddMore}
+                    style={{
+                      fontSize: "14px",
+                      padding: "14px 0px",
+                      textDecoration: "underline",
+                      textUnderlineOffset: "3px",
+                      color: "#36aa55",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Add More
+                  </div>
+                ) : (
+                  <div
+                    onClick={() => handleDelete(index)}
+                    style={{
+                      fontSize: "14px",
+                      padding: "14px 0px",
+                      textDecoration: "underline",
+                      textUnderlineOffset: "3px",
+                      color: "#ED4537",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Delete
+                  </div>
+                )}
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "12px",
+                }}
+              >
+                <input
+                  type="text"
+                  name="title"
+                  placeholder="Job Title"
+                  value={job.title}
+                  onChange={(e) => handleChange(e, index)}
+                />
+                <input
+                  type="number"
+                  name="experience"
+                  placeholder="Experience in Years"
+                  value={job.experience}
+                  onChange={(e) => handleChange(e, index)}
+                />
+                <textarea
+                  name="description"
+                  placeholder="Job Detail / Stack used / Add portfolio Links"
+                  value={job.description}
+                  onChange={(e) => handleChange(e, index)}
+                />
+              </div>
+            </div>
+          ))}
         </div>
         <div>
-          <Button text="Save Template" onClick={handleSubmit} />
+          <Button
+            text="Save Template"
+            onClick={handleSubmit}
+            disable={isSubmitDisabled}
+          />
         </div>
       </div>
     </>

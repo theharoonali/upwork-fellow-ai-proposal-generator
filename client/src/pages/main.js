@@ -4,6 +4,7 @@ import Button from "../components/button";
 import TemplateCard from "../components/templateCard";
 import Span from "../components/span";
 import Template from "./template";
+import Settings from "./settings";
 
 function Main() {
   const [step, setStep] = React.useState(0);
@@ -71,14 +72,7 @@ function Main() {
           )}
 
           {/* Settings */}
-          {step === 3 && (
-            <div className="main-section">
-              <div className="sub-main-section">Settings</div>
-              <div>
-                <Button text="Save" />
-              </div>
-            </div>
-          )}
+          {step === 3 && <Settings onClick={onClickBack} />}
         </div>
       </div>
     </>
