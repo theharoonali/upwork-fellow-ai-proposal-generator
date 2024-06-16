@@ -6,6 +6,7 @@ import Span from "../components/span";
 import Template from "./template";
 import Settings from "./settings";
 import Generate from "./generate";
+import Welcome from "../components/welcome";
 
 function Main() {
   const [step, setStep] = useState(0);
@@ -103,6 +104,8 @@ function Main() {
                   />
                 ))}
               </div>
+              {templates.length === 0 && <Welcome />}
+
               <div>
                 <Span text={`${templates.length}/2 Templates created`} />
                 <Button
