@@ -4,7 +4,7 @@ import Span from "../components/span";
 
 function Settings({ onClick }) {
   const [formData, setFormData] = useState({
-    api: "",
+    api: localStorage.getItem("apiKeyUpworkFellow") || "",
   });
 
   const handleChange = (e) => {
@@ -13,11 +13,15 @@ function Settings({ onClick }) {
   };
 
   const handleSubmit = () => {
-    console.log(formData);
+    localStorage.setItem("apiKeyUpworkFellow", formData.api);
     onClick();
   };
 
-  const isSubmitDisabled = formData.api === "";
+  const openAPIDocs = () => {
+    const apiDocsURL =
+      "https://platform.openai.com/docs/api-reference/introduction";
+    window.open(apiDocsURL, "_blank");
+  };
 
   return (
     <>
@@ -34,18 +38,15 @@ function Settings({ onClick }) {
             style={{
               textDecoration: "underline",
               textUnderlineOffset: "3px",
-              cursor:'pointer'
+              cursor: "pointer",
             }}
+            onClick={openAPIDocs}
           >
             <Span text={"Click here to see OpenAI API Docs."} />
           </span>
         </div>
         <div>
-          <Button
-            text="Save"
-            onClick={handleSubmit}
-            disable={isSubmitDisabled}
-          />
+          <Button text="Save" onClick={handleSubmit} />
         </div>
       </div>
     </>

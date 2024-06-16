@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/header";
 import Button from "../components/button";
 import TemplateCard from "../components/templateCard";
@@ -8,7 +8,22 @@ import Settings from "./settings";
 import Generate from "./generate";
 
 function Main() {
-  const [step, setStep] = React.useState(0);
+  const [step, setStep] = useState(0);
+  const [templates, setTemplates] = useState([]);
+  const [editTemplate, setEditTemplate] = useState([]);
+  const [checkAPI, setCheckAPI] = useState(false);
+
+  useEffect(() => {
+    const storedTemplates = localStorage.getItem("templates");
+    const apiKey = localStorage.getItem("apiKeyUpworkFellow");
+    if (storedTemplates) {
+      setTemplates(JSON.parse(storedTemplates));
+    }
+    setEditTemplate([]);
+    if (apiKey) {
+      setCheckAPI(true);
+    }
+  }, [step]);
 
   const onCreateTemplate = () => {
     setStep(1);
@@ -22,12 +37,12 @@ function Main() {
     setStep(3);
   };
 
-  const onSaveTemplate = () => {
-    setStep(0);
-  };
-
-  const onGenerateProposal = () => {
-    setStep(2);
+  const onGenerateTemplate = () => {
+    if (checkAPI) {
+      setStep(2);
+    } else {
+      setStep(3);
+    }
   };
 
   const getTitle = () => {
@@ -43,6 +58,18 @@ function Main() {
       default:
         return "Templates";
     }
+  };
+
+  const handleDeleteTemplate = (id) => {
+    const updatedTemplates = templates.filter((template) => template.id !== id);
+    setTemplates(updatedTemplates);
+    localStorage.setItem("templates", JSON.stringify(updatedTemplates));
+  };
+
+  const handleEditTemplate = (id) => {
+    const data = templates.find((template) => template.id === id);
+    setEditTemplate(data);
+    setStep(1);
   };
 
   return (
@@ -65,18 +92,32 @@ function Main() {
           {step === 0 && (
             <div className="main-section">
               <div className="sub-main-section">
-                <TemplateCard onClick={onGenerateProposal} />
-                <TemplateCard onClick={onGenerateProposal} />
+                {templates.map((template) => (
+                  <TemplateCard
+                    key={template.id}
+                    title={template.template}
+                    id={template.id}
+                    onDelete={handleDeleteTemplate}
+                    onEdit={handleEditTemplate}
+                    onClick={onGenerateTemplate}
+                  />
+                ))}
               </div>
               <div>
-                <Span text={"1/2 Templates created"} />
-                <Button text="Create Template" onClick={onCreateTemplate} />
+                <Span text={`${templates.length}/2 Templates created`} />
+                <Button
+                  text="Create Template"
+                  onClick={onCreateTemplate}
+                  disable={templates.length >= 2}
+                />
               </div>
             </div>
           )}
 
           {/* Create template */}
-          {step === 1 && <Template onClick={onSaveTemplate} />}
+          {step === 1 && (
+            <Template onClick={onClickBack} editTemplate={editTemplate} />
+          )}
 
           {/* Generate Proposal */}
           {step === 2 && <Generate onClick={onClickBack} />}

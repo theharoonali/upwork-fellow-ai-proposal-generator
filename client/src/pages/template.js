@@ -1,14 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "../components/button";
+import { v4 as uuidv4 } from 'uuid'; 
 
-function Template({ onClick }) {
+function Template({ onClick, editTemplate = "" }) {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    template: "",
-    instructions: "",
+    id: uuidv4() || editTemplate.id, 
+    name: editTemplate.name,
+    email: editTemplate.email,
+    template: editTemplate.template,
+    instructions: editTemplate.instructions,
     jobDetails: [{ title: "", experience: "", description: "" }],
   });
+
+  const [templates, setTemplates] = useState([]);
+
+  useEffect(() => {
+    const storedTemplates = localStorage.getItem('templates');
+    if (storedTemplates) {
+      setTemplates(JSON.parse(storedTemplates));
+    }
+  }, []);
 
   const handleChange = (e, index) => {
     const { name, value } = e.target;
@@ -40,10 +51,32 @@ function Template({ onClick }) {
   };
 
   const handleSubmit = () => {
-    console.log(formData);
+    const newTemplate = {
+      id: formData.id,
+      name: formData.name,
+      email: formData.email,
+      template: formData.template,
+      instructions: formData.instructions,
+      jobDetails: formData.jobDetails,
+    };
+
+    const updatedTemplates = [...templates, newTemplate];
+    localStorage.setItem('templates', JSON.stringify(updatedTemplates));
+
+    setFormData({
+      id: uuidv4(),
+      name: "",
+      email: "",
+      template: "",
+      instructions: "",
+      jobDetails: [{ title: "", experience: "", description: "" }],
+    });
+
+    setTemplates(updatedTemplates);
+
     onClick();
   };
-
+  
   const isSubmitDisabled = formData.name === "" || formData.template === "";
 
   return (

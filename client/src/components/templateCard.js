@@ -1,13 +1,13 @@
 import React from "react";
 import deleteIcon from "../assets/delete.svg";
 
-const TemplateCard = ({ onClick }) => {
+const TemplateCard = ({ onClick, onDelete, title, id, onEdit }) => {
   const handleEdit = () => {
-    console.log("Edit clicked");
+    onEdit(id);
   };
 
   const handleDelete = () => {
-    console.log("Delete clicked");
+    onDelete(id);
   };
 
   return (
@@ -28,7 +28,7 @@ const TemplateCard = ({ onClick }) => {
               alignItems: "center",
             }}
           >
-            Software Engineering
+            {title}
           </div>
           <div
             style={{
