@@ -72,7 +72,7 @@ function Main() {
             <div className="main-section">
               <div className="sub-main-section">Generate Proposal</div>
               <div>
-                <Button text="Regenrate" />
+                <Button text="Regenerate" />
               </div>
             </div>
           )}
