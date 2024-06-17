@@ -110,8 +110,25 @@ function Main() {
               {templates.length === 0 && <Welcome />}
 
               <div>
-                <div></div>
+                {/* <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between', marginBottom:'4px'}}> */}
+                {/* <div>
+                  <a
+                    href="https://www.buymeacoffee.com/theharoonali"
+                    target="_blank"
+                  >
+                    <img
+                      src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+                      alt="Buy Me A Coffee"
+                      style={{
+                        height: "40px ",
+                        width: "150px",
+                      }}
+                    />
+                  </a>
+                </div> */}
                 <Span text={`${templates.length}/2 Templates created`} />
+                {/* </div> */}
+
                 <Button
                   text="Create Template"
                   onClick={onCreateTemplate}
@@ -127,7 +144,9 @@ function Main() {
           )}
 
           {/* Generate Proposal */}
-          {step === 2 && <Generate onClick={onClickBack} createProposal={createProposal} />}
+          {step === 2 && (
+            <Generate onClick={onClickBack} createProposal={createProposal} />
+          )}
 
           {/* Settings */}
           {step === 3 && <Settings onClick={onClickBack} />}
