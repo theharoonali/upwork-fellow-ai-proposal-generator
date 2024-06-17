@@ -12,6 +12,7 @@ function Main() {
   const [step, setStep] = useState(0);
   const [templates, setTemplates] = useState([]);
   const [editTemplate, setEditTemplate] = useState([]);
+  const [createProposal, setCreateProposal] = useState([]);
   const [checkAPI, setCheckAPI] = useState(false);
 
   useEffect(() => {
@@ -38,7 +39,9 @@ function Main() {
     setStep(3);
   };
 
-  const onGenerateTemplate = () => {
+  const onGenerateTemplate = (id) => {
+    const data = templates.find((template) => template.id === id);
+    setCreateProposal(data);
     if (checkAPI) {
       setStep(2);
     } else {
@@ -107,6 +110,7 @@ function Main() {
               {templates.length === 0 && <Welcome />}
 
               <div>
+                <div></div>
                 <Span text={`${templates.length}/2 Templates created`} />
                 <Button
                   text="Create Template"
@@ -123,7 +127,7 @@ function Main() {
           )}
 
           {/* Generate Proposal */}
-          {step === 2 && <Generate onClick={onClickBack} />}
+          {step === 2 && <Generate onClick={onClickBack} createProposal={createProposal} />}
 
           {/* Settings */}
           {step === 3 && <Settings onClick={onClickBack} />}

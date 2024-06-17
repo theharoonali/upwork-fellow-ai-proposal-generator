@@ -1,29 +1,36 @@
 import React, { useState, useEffect } from "react";
 import Button from "../components/button";
-import { v4 as uuidv4 } from 'uuid'; 
+import { v4 as uuidv4 } from "uuid";
 
-function Template({ onClick, editTemplate = "" }) {
-  const [formData, setFormData] = useState({
-    id: uuidv4() || editTemplate.id, 
-    name: editTemplate.name,
-    email: editTemplate.email,
-    template: editTemplate.template,
-    instructions: editTemplate.instructions,
-    jobDetails: [{ title: "", experience: "", description: "" }],
-  });
+function Template({ onClick, editTemplate = {} }) {
+  const initialFormData = {
+    id: editTemplate.id || uuidv4(),
+    name: editTemplate.name || "",
+    email: editTemplate.email || "",
+    template: editTemplate.template || "",
+    instructions: editTemplate.instructions || "",
+    jobDetails: editTemplate.jobDetails || [{ title: "", experience: "", description: "" }],
+  };
 
+  const [formData, setFormData] = useState(initialFormData);
   const [templates, setTemplates] = useState([]);
 
   useEffect(() => {
-    const storedTemplates = localStorage.getItem('templates');
+    const storedTemplates = localStorage.getItem("templates");
     if (storedTemplates) {
       setTemplates(JSON.parse(storedTemplates));
     }
   }, []);
 
+  useEffect(() => {
+    if (editTemplate && editTemplate.id) {
+      setFormData(editTemplate);
+    }
+  }, [editTemplate]);
+
   const handleChange = (e, index) => {
     const { name, value } = e.target;
-    if (name === "title" || name === "experience" || name === "description") {
+    if (["title", "experience", "description"].includes(name)) {
       const updatedJobDetails = [...formData.jobDetails];
       updatedJobDetails[index] = {
         ...updatedJobDetails[index],
@@ -60,8 +67,19 @@ function Template({ onClick, editTemplate = "" }) {
       jobDetails: formData.jobDetails,
     };
 
-    const updatedTemplates = [...templates, newTemplate];
-    localStorage.setItem('templates', JSON.stringify(updatedTemplates));
+    const existingTemplateIndex = templates.findIndex(template => template.id === formData.id);
+    let updatedTemplates;
+    if (existingTemplateIndex > -1) {
+      // Update the existing template
+      updatedTemplates = [...templates];
+      updatedTemplates[existingTemplateIndex] = newTemplate;
+    } else {
+      // Add new template
+      updatedTemplates = [...templates, newTemplate];
+    }
+    
+    localStorage.setItem("templates", JSON.stringify(updatedTemplates));
+    setTemplates(updatedTemplates);
 
     setFormData({
       id: uuidv4(),
@@ -72,11 +90,9 @@ function Template({ onClick, editTemplate = "" }) {
       jobDetails: [{ title: "", experience: "", description: "" }],
     });
 
-    setTemplates(updatedTemplates);
-
     onClick();
   };
-  
+
   const isSubmitDisabled = formData.name === "" || formData.template === "";
 
   return (
@@ -168,6 +184,7 @@ function Template({ onClick, editTemplate = "" }) {
                   placeholder="Experience in Years"
                   value={job.experience}
                   onChange={(e) => handleChange(e, index)}
+                  min="0"
                 />
                 <textarea
                   name="description"

@@ -1,19 +1,15 @@
 {
   "manifest_version": 3,
-  "name": "Upwork Extension",
+  "name": "Upwork Fellow",
   "version": "1.0",
-  "description": "Description of your extension",
+  "description": "An open-source Chrome extension that generates proposals using the OpenAI API.",
   "action": {
     "default_popup": "index.html",
     "default_title": "My Apps",
-    "default_icon": {
-      "16": "logo512.png",
-      "48": "logo512.png",
-      "128": "logo512.png"
-    }
+    "default_icon": "logo128.png"
   },
-  "permissions": [
-    "activeTab",
-    "background"
-  ]
+  "icons": {
+    "128": "logo128.png"
+  },
+  "permissions": ["activeTab", "background"]
 }

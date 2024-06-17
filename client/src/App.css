@@ -4,6 +4,10 @@
   font-family: "Poppins", sans-serif;
 }
 
+body {
+  margin: 0;
+}
+
 .App {
   text-align: center;
   width: 450px;
@@ -52,7 +56,9 @@
   transition: background-color 0.3s ease;
 }
 
-.card, input, textarea {
+.card,
+input,
+textarea {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,6 +71,7 @@
   font-size: 14px;
   outline: none;
   cursor: pointer;
+  min-width: 340px;
 }
 
 .card:hover {
@@ -87,15 +94,32 @@
   margin-bottom: 24px;
 }
 
-input:focus, textarea:focus{
+input:focus,
+textarea:focus {
   transition: background-color 0.3s ease;
   border: 1px solid #36aa55;
 }
 
-.textarea-height{
+.textarea-height {
   min-height: 100px;
 }
 
-.textarea-height-2{
+.textarea-height-2 {
   min-height: 360px;
+}
+
+.response {
+  text-align: left;
+  color: "#515151";
+}
+
+
+svg{
+  width: 100px;
+  height: 100px;
+  display:inline-block;
+}
+
+.loader{
+  display:'flex'
 }

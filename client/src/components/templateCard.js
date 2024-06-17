@@ -5,14 +5,16 @@ const TemplateCard = ({ onClick, onDelete, title, id, onEdit }) => {
   const handleEdit = () => {
     onEdit(id);
   };
-
+  const handleOnClick = () => {
+    onClick(id);
+  };
   const handleDelete = () => {
     onDelete(id);
   };
 
   return (
     <div>
-      <div className="card" onClick={onClick}>
+      <div className="card" onClick={handleOnClick}>
         <div
           style={{
             display: "flex",
