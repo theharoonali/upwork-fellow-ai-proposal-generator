@@ -1,3 +1,5 @@
+An open-source chrome extension that generates proposals using the OpenAI API.
+
 ### Run Front-End
 Cd client
 
