@@ -26,7 +26,8 @@ function Generate({ onClick, createProposal }) {
     };
 
     try {
-      const response = await fetch("https://express-app-typescript.vercel.app/generate-proposal", {
+      const url = process.env.REACT_APP_PROPOSAL_API_URL;
+      const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

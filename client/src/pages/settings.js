@@ -18,11 +18,10 @@ function Settings({ onClick }) {
   };
 
   const openAPIDocs = () => {
-    const apiDocsURL =
-      "https://platform.openai.com/docs/api-reference/introduction";
+    const apiDocsURL = process.env.REACT_APP_OPENAI_DOC_URL;
     window.open(apiDocsURL, "_blank");
   };
-
+console.log(process.env.REACT_APP_OPENAI_DOC_URL)
   return (
     <>
       <div className="main-section">
