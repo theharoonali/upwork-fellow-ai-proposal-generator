@@ -3,11 +3,11 @@
 Upwork Fellow is an open-source Chrome extension designed to help freelancers generate compelling proposals using the power of the OpenAI API. With just a few clicks, you can create professional and persuasive proposals tailored to your client's needs, increasing your chances of landing more projects. Perfect for freelancers on Upwork and other freelance platforms.
 
 ### Run Front-End
-npm install \n
+npm install
 npm start
 
 ### Run Backend
-npm install 
+npm install </br>
 npm run build:watch (terminal 1)
 npm start (terminal 2)
 
