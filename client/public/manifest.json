@@ -11,5 +11,5 @@
   "icons": {
     "128": "logo128.png"
   },
-  "permissions": ["activeTab", "background"]
+  "permissions": ["activeTab"]
 }
