@@ -8,7 +8,11 @@ npm install
 npm start
 
 ### Run Backend
-... in progress
+npm install 
+
+npm run build:watch (terminal 1)
+
+npm start (terminal 2)
 
 ### How to add in the Chrome Extension
 Cd client

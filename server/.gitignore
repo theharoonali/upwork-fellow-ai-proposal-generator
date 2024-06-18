@@ -1,0 +1,21 @@
+# Dependency directories
+node_modules/
+
+# TypeScript build output directory
+dist/
+
+# Editor-specific files
+.vscode/
+.idea/
+
+# Environment variables file (if you have one)
+.env
+
+# Log files
+*.log
+
+# macOS directory attributes
+.DS_Store
+
+# Windows thumbnail cache files
+Thumbs.db
