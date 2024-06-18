@@ -21,7 +21,7 @@ function Settings({ onClick }) {
     const apiDocsURL = process.env.REACT_APP_OPENAI_DOC_URL;
     window.open(apiDocsURL, "_blank");
   };
-console.log(process.env.REACT_APP_OPENAI_DOC_URL)
+
   return (
     <>
       <div className="main-section">
@@ -29,7 +29,7 @@ console.log(process.env.REACT_APP_OPENAI_DOC_URL)
           <input
             type="text"
             name="api"
-            placeholder="API KEY*"
+            placeholder="OpenAI API Key Optional"
             value={formData.api}
             onChange={(e) => handleChange(e)}
           />

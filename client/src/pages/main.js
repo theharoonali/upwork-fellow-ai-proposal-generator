@@ -13,18 +13,18 @@ function Main() {
   const [templates, setTemplates] = useState([]);
   const [editTemplate, setEditTemplate] = useState([]);
   const [createProposal, setCreateProposal] = useState([]);
-  const [checkAPI, setCheckAPI] = useState(false);
+  // const [checkAPI, setCheckAPI] = useState(false);
 
   useEffect(() => {
     const storedTemplates = localStorage.getItem("templates");
-    const apiKey = localStorage.getItem("apiKeyUpworkFellow");
+    // const apiKey = localStorage.getItem("apiKeyUpworkFellow");
 
     if (storedTemplates) {
       setTemplates(JSON.parse(storedTemplates));
     }
     setEditTemplate([]);
 
-    setCheckAPI(!!apiKey);
+    // setCheckAPI(!!apiKey);
   }, [step]);
 
   const onCreateTemplate = () => {
@@ -42,11 +42,11 @@ function Main() {
   const onGenerateTemplate = (id) => {
     const data = templates.find((template) => template.id === id);
     setCreateProposal(data);
-    if (checkAPI) {
+    // if (checkAPI) {
       setStep(2);
-    } else {
-      setStep(3);
-    }
+    // } else {
+    //   setStep(3);
+    // }
   };
 
   const getTitle = () => {

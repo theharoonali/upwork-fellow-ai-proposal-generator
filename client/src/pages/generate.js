@@ -85,7 +85,7 @@ function Generate({ onClick, createProposal }) {
             <textarea
               type="text"
               name="proposal"
-              placeholder="Proposal"
+              placeholder="Client's Job Description"
               value={formData.proposal}
               onChange={(e) => handleChange(e)}
               className="textarea-height-2"
