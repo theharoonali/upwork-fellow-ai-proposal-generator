@@ -1,5 +1,5 @@
 {
-  "name": "express-app",
+  "name": "upwork-fellow-backend",
   "version": "1.0.0",
   "description": "",
   "main": "dist/api/index.js",
