@@ -1,15 +1,14 @@
 {
   "manifest_version": 3,
-  "name": "Upwork Fellow",
+  "name": "Upwork Fellow - AI Proposal & Cover Letter Writer",
   "version": "1.0",
-  "description": "An open-source Chrome extension that generates proposals using the OpenAI API.",
+  "description": "An open-source chrome extension that generates proposals using the OpenAI API.",
   "action": {
     "default_popup": "index.html",
-    "default_title": "Upwork Fellow",
+    "default_title": "Upwork Fellow - AI Proposal & Cover Letter Writer",
     "default_icon": "logo128.png"
   },
   "icons": {
     "128": "logo128.png"
-  },
-  "permissions": ["activeTab"]
+  }
 }
