@@ -11,7 +11,7 @@ Upwork Fellow is an open-source Chrome extension designed to help freelancers ge
 ### Run Backend
 1. npm install </br>
 2. npm run build:watch (terminal 1) </br>
-3.  npm start (terminal 2) </br>
+3. npm start (terminal 2) </br>
 
 ### How to add in the Chrome Extension 
 1. Go to client folder </br>
